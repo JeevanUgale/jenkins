@@ -27,7 +27,17 @@ pipeline {
                 mv apache-tomcat-8.5.99/webapps/*.war apache-tomcat-8.5.99/webapps/student.war
                 rm -rf apache-tomcat-8.5.99/webapps/studentapp-2.2-SNAPSHOT*
                 sed -i 's/port=\"8080\"/port=\"8081\"/' ./apache-tomcat-8.5.99/conf/server.xml
+                bash apache-tomcat-8.5.99/bin/startup.sh start
                 ls'''
+            }
+         }
+        stage('deploy on test server') {
+            agent {
+                label "slave"
+            }
+            input {
+               message "do you want to depoly on prod"
+               ok "yes"
             }
          }
     }
