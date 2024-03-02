@@ -31,7 +31,7 @@ pipeline {
                 ls'''
             }
          }
-        stage('deploy on test server') {
+         stage('deploy on test server') {
             agent {
                 label "slave"
             }
@@ -39,6 +39,8 @@ pipeline {
                message "do you want to depoly on prod"
                ok "yes"
             }
+             steps {
+                 sh 'echo "hello world"'
          }
     }
 }
