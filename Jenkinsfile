@@ -22,6 +22,7 @@ pipeline {
             steps {
                 sh '''curl -O https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.99/bin/apache-tomcat-8.5.99.tar.gz
                 tar -xvf apache-tomcat-8.5.99.tar.gz
+                sed -i 's/port=\"8080\"/port=\"8081\"/' ./apache-tomcat-8.5.99/conf/server.xml
                 bash apache-tomcat-8.5.99/bin/catalina.sh start
                 ls'''
             }
