@@ -31,7 +31,7 @@ pipeline {
                 ls'''
             }
          }
-         stage('deploy on test server') {
+         stage('deploy on prod') {
             agent {
                 label "slave"
             }
