@@ -22,11 +22,11 @@ pipeline {
                 sh '''curl -O https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.99/bin/apache-tomcat-8.5.99.tar.gz
                 tar -xvf apache-tomcat-8.5.99.tar.gz
                 cp ./target/*.war apache-tomcat-8.5.99/webapps/
+                bash apache-tomcat-8.5.99/bin/catalina.sh start
                 mv apache-tomcat-8.5.99/webapps/*.war apache-tomcat-8.5.99/webapps/student.war
                 rm -rf apache-tomcat-8.5.99/webapps/studentapp-2.2-SNAPSHOT*
                 sed -i 's/port=\"8080\"/port=\"8081\"/' ./apache-tomcat-8.5.99/conf/server.xml
-                bash apache-tomcat-8.5.99/bin/startup.sh start
-                bash apache-tomcat-8.5.99/bin/catalina.sh start'''
+                bash apache-tomcat-8.5.99/bin/startup.sh start'''
             }
          }
         
@@ -47,10 +47,10 @@ pipeline {
                 curl -O https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.99/bin/apache-tomcat-8.5.99.tar.gz
                 tar -xvf apache-tomcat-8.5.99.tar.gz
                 cp ./target/*.war apache-tomcat-8.5.99/webapps/
+                bash apache-tomcat-8.5.99/bin/catalina.sh start
                 mv apache-tomcat-8.5.99/webapps/*.war apache-tomcat-8.5.99/webapps/student.war
                 rm -rf apache-tomcat-8.5.99/webapps/studentapp-2.2-SNAPSHOT*
-                bash apache-tomcat-8.5.99/bin/startup.sh start
-                bash apache-tomcat-8.5.99/bin/catalina.sh start'''
+                bash apache-tomcat-8.5.99/bin/startup.sh start'''
             }
          }
     }
