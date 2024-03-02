@@ -26,6 +26,7 @@ pipeline {
                 cp ./target/*.war apache-tomcat-8.5.99/webapps/
                 mv apache-tomcat-8.5.99/webapps/*.war apache-tomcat-8.5.99/webapps/student.war
                 rm -rf apache-tomcat-8.5.99/webapps/studentapp-2.2-SNAPSHOT*
+                sed -i 's/port=\"8080\"/port=\"8081\"/' ./apache-tomcat-8.5.99/conf/server.xml
                 ls'''
             }
          }
