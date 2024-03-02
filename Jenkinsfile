@@ -1,38 +1,30 @@
 pipeline {
-    agent any
+    agent {
+        label "master"
+    }
     tools {
-        git 'Default'
         maven 'maven'
-        
     }
     stages {
-        stage('Pull Git Codes') {
+        
+        stage('mvn test') { 
             steps {
-                git 'https://github.com/deepak-umre/jenkins_ci.git'
+                sh 'mvn test'
             }
         }
-        stage('Build with Maven') {
+        stage('mvn build') { 
             steps {
-                sh 'mvn clean install'
+                sh 'mvn install'
+                archiveArtifacts artifacts: '**/*.war', followSymlinks: false
             }
-        }
-        stage('Test on SonarQube') {
+         }
+         stage('deploy on test server') {
             steps {
-                script {
-                    sh '''mvn clean verify sonar:sonar \
-                    -Dsonar.projectKey=demo \
-                    -Dsonar.host.url=http://localhost:9000 \
-                    -Dsonar.login=sqp_46489272405d97111af92c42c1324a64ab9f6d3b'''
-                }
+                sh '''curl -O https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.99/bin/apache-tomcat-8.5.99.tar.gz
+                tar -xvf apache-tomcat-8.5.99
+                bash apache-tomcat-8.5.99/bin/catalina.sh start
+                ls'''
             }
-        }
-        stage('Deploy on Tomcat') {
-            steps {
-                script {
-                    sh 'cp -r /var/lib/jenkins/workspace/demo/target/*.war /opt/apache-tomcat-8.5.99/webapps/'
-                    //copy
-                }
-            }
-        }
+         }
     }
 }
