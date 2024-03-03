@@ -17,7 +17,7 @@ pipeline {
                 stash includes: '**/*.war', name: 'mywar'
             }
         }
-        stage('docker login') {
+        stage('docker login,build,push') {
             agent {
                 label "slave"
             }
@@ -30,7 +30,8 @@ pipeline {
                     sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
                     sh 'docker build -t jeevanugale/tomcat:2 .'
                     sh 'docker images'
-                    sh 'docker run -d -p 8080:8080 --name tomcat jeevanugale/tomcat:2
+                    sh 'docker run -d -p 8080:8080 --name tomcat jeevanugale/tomcat:2'
+                    sh 'docker ps'
                   }
                 }
             }
