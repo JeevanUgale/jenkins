@@ -23,6 +23,8 @@ pipeline {
             }
             steps {
                 unstash 'mywar'
+                sh 'cp ./target/*.war .'
+                sh 'mv ./*.war student.war'
                 script {
                   withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
