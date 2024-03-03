@@ -32,7 +32,7 @@ pipeline {
         }
       stage('build docker image') { 
             steps {
-                sh 'docker ps'
+                sh 'docker build -t jeevanugale/tomcat:2 .'
                 sh 'docker images'
             }
         }
