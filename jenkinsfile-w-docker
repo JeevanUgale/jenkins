@@ -28,7 +28,7 @@ pipeline {
                 script {
                   withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                    sh 'docker build -t jeevanugale/tomcat:2 .'
+                    sh 'docker build -t jeevanugale/tomcat:${env.BUILD_NUMBER} .'
                     sh 'docker images'
                     sh 'docker run -d -p 8080:8080 --name tomcat jeevanugale/tomcat:2'
                     sh 'docker ps'
