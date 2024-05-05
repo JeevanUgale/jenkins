@@ -6,3 +6,11 @@
   </welcome-file-list>
  
 </web-app>
+<servlet>
+    <servlet-name>MetricsServlet</servlet-name>
+    <servlet-class>com.example.MetricsServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>MetricsServlet</servlet-name>
+    <url-pattern>/metrics</url-pattern>
+</servlet-mapping>
