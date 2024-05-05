@@ -1,0 +1,24 @@
+package com.example;
+
+import io.prometheus.client.Counter;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/metrics")
+public class MetricsServlet extends HttpServlet {
+    private static final Counter requestsTotal = Counter.build()
+        .name("myapp_requests_total")
+        .help("Total number of requests to the application")
+        .register();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        requestsTotal.inc();
+        resp.getWriter().write("# HELP myapp_requests_total Total number of requests to the application\n");
+        resp.getWriter().write("# TYPE myapp_requests_total counter\n");
+        resp.getWriter().write("myapp_requests_total " + requestsTotal.get() + "\n");
+    }
+}
